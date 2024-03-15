@@ -3,6 +3,7 @@
 
 O aplicativo ZeroDengue tem como objetivo atuar no controle de Dengue nas Smart Cities. Com a colaboração da população juntamente dos agentes comunitários de saúde, é possível reportar potenciais focos de dengue, auxiliando os agentes no combate.
 O app possui uma interface simples, sendo um MVP com a proposta em questão. Confira o [Roadmap](#roadmap) para futuras melhorias.
+
 Projeto idealizado e desenvolvido por: [confira os autores](#autores)
 
 ## Stack utilizada
