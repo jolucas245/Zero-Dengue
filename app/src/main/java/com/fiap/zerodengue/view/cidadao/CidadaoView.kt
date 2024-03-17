@@ -1,4 +1,4 @@
-package com.fiap.zerodengue.views.cidadao
+package com.fiap.zerodengue.view.cidadao
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,25 +15,24 @@ import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.CustomTopBar
 import com.fiap.zerodengue.ui.components.TabsLogin
-import com.fiap.zerodengue.views.vistoriador.VistoriadorViewModel
-import com.fiap.zerodengue.views.vistoriador.tabs.SignInTabVistoriador
-import com.fiap.zerodengue.views.vistoriador.tabs.SignUpTabVistoriador
+import com.fiap.zerodengue.view.cidadao.tabs.SignInTabCidadao
+import com.fiap.zerodengue.view.cidadao.tabs.SignUpTabCidadao
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VistoriadorView(
-    vistoriadorViewModel: VistoriadorViewModel,
+fun CidadaoView(
+    cidadaoViewModel: CidadaoViewModel,
     navController: NavController
 ){
 
-    val tabIndex by vistoriadorViewModel.tabIndex.observeAsState(initial = 0)
+    val tabIndex by cidadaoViewModel.tabIndex.observeAsState(initial = 0)
 
     Scaffold(
         topBar = CustomTopBar(
-            title = "Vistoriador",
+            title = "Cidadão",
             navigationIcon = R.drawable.arrow_back_ios_24,
             contentDescription = "Volta",
-            colorAppBar = R.color.vistoriador,
+            colorAppBar = R.color.cidadao,
             onClickIcon = {
                 navController.popBackStack()
             }
@@ -51,14 +50,14 @@ fun VistoriadorView(
                     TabsLogin(
                         tabIndex = tabIndex,
                         onSelectedTab = {
-                            vistoriadorViewModel.onTabIndexChanged(it)
+                            cidadaoViewModel.onTabIndexChanged(it)
                         },
-                        tabs = vistoriadorViewModel.tabs,
-                        color = R.color.vistoriador
+                        tabs = cidadaoViewModel.tabs,
+                        color = R.color.cidadao
                     )
                     when (tabIndex){
-                        0 -> SignInTabVistoriador()
-                        1 -> SignUpTabVistoriador()
+                        0 -> SignInTabCidadao(navController)
+                        1 -> SignUpTabCidadao(navController)
                     }
                 }
             }

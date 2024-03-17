@@ -1,4 +1,4 @@
-package com.fiap.zerodengue.views.vistoriador.tabs
+package com.fiap.zerodengue.view.vistoriador.tabs
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -27,11 +27,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.GradientButton
 
 @Composable
-fun SignInTabVistoriador(){
+fun SignInTabVistoriador(navController: NavController){
 
     var email by remember {
         mutableStateOf("")
@@ -98,7 +99,9 @@ fun SignInTabVistoriador(){
             gradient = Brush.horizontalGradient(listOf(Color(0xFF04A8F3), Color(0xFF5C6BC0))),
             elevation = ButtonDefaults.buttonElevation(4.dp),
             onClick = {
-
+                navController.navigate("main/vistoriador"){
+                    popUpTo("initial"){inclusive = true}
+                }
             },
             modifier = Modifier
                 .padding(bottom = 30.dp)

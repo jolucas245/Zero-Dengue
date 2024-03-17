@@ -1,4 +1,4 @@
-package com.fiap.zerodengue.views.initial
+package com.fiap.zerodengue.view.initial
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

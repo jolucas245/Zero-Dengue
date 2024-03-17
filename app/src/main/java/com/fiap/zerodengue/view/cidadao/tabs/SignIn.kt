@@ -1,4 +1,4 @@
-package com.fiap.zerodengue.views.vistoriador.tabs
+package com.fiap.zerodengue.view.cidadao.tabs
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -28,11 +28,13 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.GradientButton
 
 @Composable
-fun SignUpTabVistoriador(){
+fun SignInTabCidadao(navController: NavController){
+
     var email by remember {
         mutableStateOf("")
     }
@@ -47,7 +49,7 @@ fun SignUpTabVistoriador(){
         verticalArrangement = Arrangement.Center
     ) {
         Image(
-            painter = painterResource(id = R.drawable.signup_v),
+            painter = painterResource(id = R.drawable.signin_c),
             contentDescription = "",
             modifier = Modifier.height(200.dp)
         )
@@ -58,29 +60,8 @@ fun SignUpTabVistoriador(){
             ),
             shape = RoundedCornerShape(32.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = colorResource(id = R.color.vistoriador),
-                focusedLabelColor = colorResource(id = R.color.vistoriador)
-            ),
-            maxLines = 1,
-            singleLine = true,
-            label = {
-                Text(text = "Nome")
-            },
-            value = email,
-            onValueChange = {
-                email = it
-            }
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(
-                imeAction = ImeAction.Next
-            ),
-            shape = RoundedCornerShape(32.dp),
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = colorResource(id = R.color.vistoriador),
-                focusedLabelColor = colorResource(id = R.color.vistoriador)
+                focusedBorderColor = colorResource(id = R.color.cidadao),
+                focusedLabelColor = colorResource(id = R.color.cidadao)
             ),
             maxLines = 1,
             singleLine = true,
@@ -101,8 +82,8 @@ fun SignUpTabVistoriador(){
             ),
             shape = RoundedCornerShape(32.dp),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = colorResource(id = R.color.vistoriador),
-                focusedLabelColor = colorResource(id = R.color.vistoriador)
+                focusedBorderColor = colorResource(id = R.color.cidadao),
+                focusedLabelColor = colorResource(id = R.color.cidadao)
 
             ),
             maxLines = 1,
@@ -117,17 +98,19 @@ fun SignUpTabVistoriador(){
         )
         Spacer(modifier = Modifier.height(20.dp))
         GradientButton(
-            gradient = Brush.horizontalGradient(listOf(Color(0xFF04A8F3), Color(0xFF5C6BC0))),
+            gradient = Brush.horizontalGradient(listOf(Color(0xFFF58327), Color(0xFFED165A))),
             elevation = ButtonDefaults.buttonElevation(4.dp),
             onClick = {
-
+                navController.navigate("main/cidadao"){
+                    popUpTo("initial"){inclusive = true}
+                }
             },
             modifier = Modifier
                 .padding(bottom = 30.dp)
                 .fillMaxWidth()
         ) {
             Text(
-                text = "Cadastrar",
+                text = "Entrar",
                 fontSize = 24.sp,
             )
         }

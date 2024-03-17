@@ -1,10 +1,10 @@
-package com.fiap.zerodengue.views.vistoriador
+package com.fiap.zerodengue.view.cidadao
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class VistoriadorViewModel: ViewModel() {
+class CidadaoViewModel: ViewModel() {
     private val _tabIndex = MutableLiveData<Int>()
     val tabIndex: LiveData<Int> = _tabIndex
 
