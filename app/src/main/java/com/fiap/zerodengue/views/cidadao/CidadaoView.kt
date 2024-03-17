@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.CustomTopBar
 import com.fiap.zerodengue.ui.components.TabsLogin
@@ -19,7 +20,10 @@ import com.fiap.zerodengue.views.cidadao.tabs.SignUpTabCidadao
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CidadaoView(cidadaoViewModel: CidadaoViewModel){
+fun CidadaoView(
+    cidadaoViewModel: CidadaoViewModel,
+    navController: NavController
+){
 
     val tabIndex by cidadaoViewModel.tabIndex.observeAsState(initial = 0)
 
@@ -28,7 +32,10 @@ fun CidadaoView(cidadaoViewModel: CidadaoViewModel){
             title = "Cidadão",
             navigationIcon = R.drawable.arrow_back_ios_24,
             contentDescription = "Volta",
-            colorAppBar = R.color.cidadao
+            colorAppBar = R.color.cidadao,
+            onClickIcon = {
+                navController.popBackStack()
+            }
         ),
         content = {
             paddingValues ->
@@ -46,7 +53,7 @@ fun CidadaoView(cidadaoViewModel: CidadaoViewModel){
                             cidadaoViewModel.onTabIndexChanged(it)
                         },
                         tabs = cidadaoViewModel.tabs,
-                        color = R.color.vistoriador
+                        color = R.color.cidadao
                     )
                     when (tabIndex){
                         0 -> SignInTabCidadao()

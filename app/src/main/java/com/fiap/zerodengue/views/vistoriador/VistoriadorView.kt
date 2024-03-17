@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.CustomTopBar
 import com.fiap.zerodengue.ui.components.TabsLogin
@@ -20,7 +21,10 @@ import com.fiap.zerodengue.views.vistoriador.tabs.SignUpTabVistoriador
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VistoriadorView(vistoriadorViewModel: VistoriadorViewModel){
+fun VistoriadorView(
+    vistoriadorViewModel: VistoriadorViewModel,
+    navController: NavController
+){
 
     val tabIndex by vistoriadorViewModel.tabIndex.observeAsState(initial = 0)
 
@@ -29,7 +33,10 @@ fun VistoriadorView(vistoriadorViewModel: VistoriadorViewModel){
             title = "Vistoriador",
             navigationIcon = R.drawable.arrow_back_ios_24,
             contentDescription = "Volta",
-            colorAppBar = R.color.vistoriador
+            colorAppBar = R.color.vistoriador,
+            onClickIcon = {
+                navController.popBackStack()
+            }
         ),
         content = {
             paddingValues ->
