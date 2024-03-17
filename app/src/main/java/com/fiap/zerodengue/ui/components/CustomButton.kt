@@ -36,8 +36,8 @@ fun GradientButton(
         contentPadding = PaddingValues(),
         modifier = modifier,
         elevation = elevation,
-        onClick = { onClick() })
-    {
+        onClick = onClick
+    ) {
         Box(
             modifier = Modifier
                 .background(gradient)
