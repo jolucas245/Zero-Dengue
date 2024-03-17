@@ -8,7 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.fiap.zerodengue.ui.theme.ZeroDengueTheme
-import com.fiap.zerodengue.views.cidadao.CidadaoView
+import com.fiap.zerodengue.views.cidadao.VistoriadorView
+import com.fiap.zerodengue.views.vistoriador.VistoriadorViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,7 +20,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    CidadaoView()
+                    VistoriadorView(VistoriadorViewModel())
                 }
             }
         }

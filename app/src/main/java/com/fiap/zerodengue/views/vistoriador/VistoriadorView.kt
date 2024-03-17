@@ -14,21 +14,22 @@ import androidx.compose.ui.Modifier
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.CustomTopBar
 import com.fiap.zerodengue.ui.components.TabsLogin
-import com.fiap.zerodengue.views.cidadao.tabs.SignInTabCidadao
-import com.fiap.zerodengue.views.cidadao.tabs.SignUpTabCidadao
+import com.fiap.zerodengue.views.vistoriador.VistoriadorViewModel
+import com.fiap.zerodengue.views.vistoriador.tabs.SignInTabVistoriador
+import com.fiap.zerodengue.views.vistoriador.tabs.SignUpTabVistoriador
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CidadaoView(cidadaoViewModel: CidadaoViewModel){
+fun VistoriadorView(vistoriadorViewModel: VistoriadorViewModel){
 
-    val tabIndex by cidadaoViewModel.tabIndex.observeAsState(initial = 0)
+    val tabIndex by vistoriadorViewModel.tabIndex.observeAsState(initial = 0)
 
     Scaffold(
         topBar = CustomTopBar(
-            title = "Cidadão",
+            title = "Vistoriador",
             navigationIcon = R.drawable.arrow_back_ios_24,
             contentDescription = "Volta",
-            colorAppBar = R.color.cidadao
+            colorAppBar = R.color.vistoriador
         ),
         content = {
             paddingValues ->
@@ -43,14 +44,14 @@ fun CidadaoView(cidadaoViewModel: CidadaoViewModel){
                     TabsLogin(
                         tabIndex = tabIndex,
                         onSelectedTab = {
-                            cidadaoViewModel.onTabIndexChanged(it)
+                            vistoriadorViewModel.onTabIndexChanged(it)
                         },
-                        tabs = cidadaoViewModel.tabs,
+                        tabs = vistoriadorViewModel.tabs,
                         color = R.color.vistoriador
                     )
                     when (tabIndex){
-                        0 -> SignInTabCidadao()
-                        1 -> SignUpTabCidadao()
+                        0 -> SignInTabVistoriador()
+                        1 -> SignUpTabVistoriador()
                     }
                 }
             }
