@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.CustomTopBar
 import com.fiap.zerodengue.ui.components.TabsLogin
-import com.fiap.zerodengue.views.cidadao.tabs.SignInTab
-import com.fiap.zerodengue.views.cidadao.tabs.SignUpTab
+import com.fiap.zerodengue.views.cidadao.tabs.SignInTabCidadao
+import com.fiap.zerodengue.views.cidadao.tabs.SignUpTabCidadao
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,8 +64,8 @@ fun CidadaoView(){
                         tabs = tabs
                     )
                     when (tabIndex){
-                        0 -> SignInTab()
-                        1 -> SignUpTab()
+                        0 -> SignInTabCidadao()
+                        1 -> SignUpTabCidadao()
                     }
                 }
             }
