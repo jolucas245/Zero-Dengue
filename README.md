@@ -14,8 +14,8 @@ Projeto idealizado e desenvolvido por: [confira os autores](#autores)
 
 ## Screenshots
 
-<div align="center">
-<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/repo-images/initial_view.png">
+<div>
+<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/repo-images/initial_view.png" alt="">
 </div>
 
 # Roadmap
