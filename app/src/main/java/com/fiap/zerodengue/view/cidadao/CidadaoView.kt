@@ -56,8 +56,8 @@ fun CidadaoView(
                         color = R.color.cidadao
                     )
                     when (tabIndex){
-                        0 -> SignInTabCidadao(navController)
-                        1 -> SignUpTabCidadao(navController)
+                        0 -> SignInTabCidadao(navController, cidadaoViewModel)
+                        1 -> SignUpTabCidadao(navController, cidadaoViewModel)
                     }
                 }
             }

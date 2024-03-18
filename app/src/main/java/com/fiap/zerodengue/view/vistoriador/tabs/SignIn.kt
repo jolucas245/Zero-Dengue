@@ -15,9 +15,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -30,20 +28,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.GradientButton
+import com.fiap.zerodengue.view.vistoriador.VistoriadorViewModel
 
 @Composable
-fun SignInTabVistoriador(navController: NavController){
+fun SignInTabVistoriador(navController: NavController, vistoriadorViewModel: VistoriadorViewModel) {
 
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
+    val email by vistoriadorViewModel.email.observeAsState("")
+    val password by vistoriadorViewModel.password.observeAsState("")
 
     Column(
-        modifier = Modifier.fillMaxWidth().padding(42.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(42.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -69,7 +65,7 @@ fun SignInTabVistoriador(navController: NavController){
             },
             value = email,
             onValueChange = {
-                email = it
+                vistoriadorViewModel.onEmailChanged(it)
             }
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -91,7 +87,7 @@ fun SignInTabVistoriador(navController: NavController){
             },
             value = password,
             onValueChange = {
-                password = it
+                vistoriadorViewModel.onPasswordChanged(it)
             }
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -99,9 +95,19 @@ fun SignInTabVistoriador(navController: NavController){
             gradient = Brush.horizontalGradient(listOf(Color(0xFF04A8F3), Color(0xFF5C6BC0))),
             elevation = ButtonDefaults.buttonElevation(4.dp),
             onClick = {
-                navController.navigate("main/vistoriador"){
-                    popUpTo("initial"){inclusive = true}
-                }
+                vistoriadorViewModel.login(
+                    email,
+                    password,
+                    onSuccess = {
+                        navController.navigate("main/vistoriador"){
+                            popUpTo("initial"){inclusive = true}
+                        }
+
+                    },
+                    onFailed = {
+                        print("Deu não mano")
+                    }
+                )
             },
             modifier = Modifier
                 .padding(bottom = 30.dp)
@@ -114,4 +120,5 @@ fun SignInTabVistoriador(navController: NavController){
         }
 
     }
+
 }

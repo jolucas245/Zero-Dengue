@@ -15,9 +15,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -31,19 +29,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.fiap.zerodengue.R
 import com.fiap.zerodengue.ui.components.GradientButton
+import com.fiap.zerodengue.view.cidadao.CidadaoViewModel
 
 @Composable
-fun SignUpTabCidadao(navController: NavController){
-    var email by remember {
-        mutableStateOf("")
-    }
-
-    var password by remember {
-        mutableStateOf("")
-    }
+fun SignUpTabCidadao(navController: NavController, cidadaoViewModel: CidadaoViewModel){
+    val name by cidadaoViewModel.name.observeAsState("")
+    val email by cidadaoViewModel.email.observeAsState("")
+    val password by cidadaoViewModel.password.observeAsState("")
 
     Column(
-        modifier = Modifier.fillMaxWidth().padding(42.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(42.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -67,9 +64,9 @@ fun SignUpTabCidadao(navController: NavController){
             label = {
                 Text(text = "Nome")
             },
-            value = email,
+            value = name,
             onValueChange = {
-                email = it
+                cidadaoViewModel.onNameChanged(it)
             }
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -90,7 +87,7 @@ fun SignUpTabCidadao(navController: NavController){
             },
             value = email,
             onValueChange = {
-                email = it
+                cidadaoViewModel.onEmailChanged(it)
             }
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -113,7 +110,7 @@ fun SignUpTabCidadao(navController: NavController){
             },
             value = password,
             onValueChange = {
-                password = it
+                cidadaoViewModel.onPasswordChanged(it)
             }
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -121,9 +118,19 @@ fun SignUpTabCidadao(navController: NavController){
             gradient = Brush.horizontalGradient(listOf(Color(0xFFF58327), Color(0xFFED165A))),
             elevation = ButtonDefaults.buttonElevation(4.dp),
             onClick = {
-                navController.navigate("main/cidadao"){
-                    popUpTo("initial"){inclusive = true}
-                }
+                cidadaoViewModel.register(
+                    email,
+                    password,
+                    name,
+                    onSuccess = {
+                        navController.navigate("main/cidadao"){
+                            popUpTo("initial"){inclusive = true}
+                        }
+                    },
+                    onFailed = {
+                        println("Deu não mano")
+                    }
+                )
             },
             modifier = Modifier
                 .padding(bottom = 30.dp)

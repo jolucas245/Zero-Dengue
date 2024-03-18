@@ -57,8 +57,8 @@ fun VistoriadorView(
                         color = R.color.vistoriador
                     )
                     when (tabIndex){
-                        0 -> SignInTabVistoriador(navController)
-                        1 -> SignUpTabVistoriador(navController)
+                        0 -> SignInTabVistoriador(navController, vistoriadorViewModel)
+                        1 -> SignUpTabVistoriador(navController, vistoriadorViewModel)
                     }
                 }
             }
