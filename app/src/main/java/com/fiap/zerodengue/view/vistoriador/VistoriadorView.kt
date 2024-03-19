@@ -1,4 +1,4 @@
-package com.fiap.zerodengue.view.cidadao
+package com.fiap.zerodengue.view.vistoriador
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column

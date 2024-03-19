@@ -39,7 +39,9 @@ fun MainView(navController: NavController, type: String){
         floatingActionButton = {
             if(type == "cidadao"){
                 FloatingActionButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        navController.navigate("reference")
+                    },
                     containerColor = colorResource(id = R.color.cidadao),
                 ) {
                     Icon(

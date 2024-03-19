@@ -13,9 +13,10 @@ import androidx.navigation.compose.rememberNavController
 import com.fiap.zerodengue.ui.theme.ZeroDengueTheme
 import com.fiap.zerodengue.view.cidadao.CidadaoView
 import com.fiap.zerodengue.view.cidadao.CidadaoViewModel
-import com.fiap.zerodengue.view.cidadao.VistoriadorView
-import com.fiap.zerodengue.view.initial.InitialView
+import com.fiap.zerodengue.view.cidadao.ReferenceView
+import com.fiap.zerodengue.view.cidadao.ReferenceViewModel
 import com.fiap.zerodengue.view.main.MainView
+import com.fiap.zerodengue.view.vistoriador.VistoriadorView
 import com.fiap.zerodengue.view.vistoriador.VistoriadorViewModel
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +31,8 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = "initial"){
                         composable("initial"){
-                            InitialView(navController = navController)
+//                            InitialView(navController = navController)
+                            ReferenceView(navController = navController, referenceViewModel = ReferenceViewModel())
                         }
                         composable("cidadao"){
                             CidadaoView(
@@ -48,6 +50,9 @@ class MainActivity : ComponentActivity() {
                             val type = it.arguments?.getString("type")
                             MainView(navController = navController, type = type!!)
                         }
+//                        composable("reference"){
+//                            ReferenceView(navController = navController, referenceViewModel = ReferenceViewModel())
+//                        }
                     }
                 }
             }
