@@ -18,8 +18,9 @@ Projeto idealizado e desenvolvido por: [confira os autores](#autores)
 
 <div align="center">
 <img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/initial_view.png">&nbsp;&nbsp;
-<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/IMC-FIAP/master/repo-images/ideal.png">&nbsp;&nbsp;
-<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/IMC-FIAP/master/repo-images/gordao.png">&nbsp;&nbsp;
+<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/login_c.png">&nbsp;&nbsp;
+<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/login_v.png">&nbsp;&nbsp;
+<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/referencia_default.png">&nbsp;&nbsp;
 </div>
 
 
