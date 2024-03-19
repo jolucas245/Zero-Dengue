@@ -1,8 +1,11 @@
 package com.fiap.zerodengue.view.cidadao
 
+import android.net.Uri
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,6 +26,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -30,6 +34,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -42,7 +49,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.fiap.zerodengue.R
+import com.fiap.zerodengue.data.DengueLocation
+import com.fiap.zerodengue.data.DengueRepository
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ReferenceView(
     navController: NavController,
@@ -59,6 +69,8 @@ fun ReferenceView(
             referenceViewModel.setSelectedImageUri(uri)
         }
     )
+
+    var isLoadingState by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = Modifier.padding(24.dp)
@@ -101,9 +113,12 @@ fun ReferenceView(
                         Box(
                             modifier = Modifier
                                 .padding(10.dp)
-                                .background(colorResource(id = R.color.cidadao), shape = CircleShape)
+                                .background(
+                                    colorResource(id = R.color.cidadao),
+                                    shape = CircleShape
+                                )
                                 .size(42.dp)
-                                .clickable { referenceViewModel.setSelectedImageUri(null)}
+                                .clickable { referenceViewModel.setSelectedImageUri(null) }
                             ,
                             contentAlignment = Alignment.Center
                         ) {
@@ -203,13 +218,22 @@ fun ReferenceView(
                 }
                 Button(
                     onClick = {
-
+                        val newLocation = DengueLocation(address, refPoint, description)
+                        val dengueRepository = DengueRepository()
+                        dengueRepository.saveDengueLocation(newLocation, imageUri = selectedImageUri as Uri) {
+                            isLoading -> isLoadingState = isLoading
+                            navController.navigate("main/cidadao"){
+                                popUpTo("reference"){inclusive = true}
+                            }
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = colorResource(id = R.color.cidadao)
                     )
                 ) {
-                    Text(text = "Enviar")
+                    if(!isLoadingState) Text(text = "Enviar")
+                    else CircularProgressIndicator(modifier = Modifier.height(30.dp))
+
                 }
             }
         }
