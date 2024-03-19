@@ -62,7 +62,7 @@ fun SignUpTabVistoriador(navController: NavController, vistoriadorViewModel: Vis
             label = {
                 Text(text = "Nome")
             },
-            value = email,
+            value = name,
             onValueChange = {
                 vistoriadorViewModel.onNameChanged(it)
             }

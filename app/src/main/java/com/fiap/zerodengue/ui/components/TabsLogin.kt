@@ -48,7 +48,6 @@ fun TabsLogin(
                 selected = tabIndex == index,
                 onClick = {
                     onSelectedTab(index)
-                    println("Você está na $tabIndex")
                 }
             )
         }
