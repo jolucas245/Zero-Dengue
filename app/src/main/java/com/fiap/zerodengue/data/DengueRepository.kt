@@ -49,19 +49,6 @@ class DengueRepository {
             }
     }
 
-//    fun getImages(onSuccess: (List<String>) -> Unit, onFailure: (Exception) -> Unit) {
-//        val db = Firebase.firestore
-//        db.collection("locations")
-//            .get()
-//            .addOnSuccessListener { documents ->
-//                val urls = documents.mapNotNull { it.getString("imageUrl") }
-//                onSuccess(urls)
-//            }
-//            .addOnFailureListener { exception ->
-//                onFailure(exception)
-//            }
-//    }
-
 fun getImages(onSuccess: (List<DengueLocation>) -> Unit, onFailure: (Exception) -> Unit) {
     val db = Firebase.firestore
     db.collection("locations")

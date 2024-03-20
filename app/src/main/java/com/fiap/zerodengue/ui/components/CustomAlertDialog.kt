@@ -1,15 +1,20 @@
 package com.fiap.zerodengue.ui.components
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -36,7 +41,6 @@ fun CustomAlertDialog(
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(320.dp)
                 ) {
                     items(count = locations.size) { location ->
                         Column(
@@ -64,7 +68,30 @@ fun CustomAlertDialog(
                     }
                 }
             },
-            confirmButton = {}
+            confirmButton = {
+                LazyRow {
+                    items(count = locations.size){ index ->
+                        MapButton(address = locations[index].address)
+                    }
+                }
+            }
         )
+    }
+}
+
+@Composable
+fun MapButton(address: String) {
+    val context = LocalContext.current
+    val intent = remember {
+        Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=$address"))
+            .setPackage("com.google.android.apps.maps")
+    }
+
+    Button(
+        onClick = {
+            context.startActivity(intent)
+        }
+    ) {
+        Text("Abrir no Google Maps")
     }
 }
