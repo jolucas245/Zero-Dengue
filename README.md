@@ -29,5 +29,8 @@ Projeto idealizado e desenvolvido por: [confira os autores](#autores)
 ## Autores
 
 - [@jolucas245](https://www.github.com/jolucas245)
-
+- [@anapastori](https://www.github.com/anapastori)
+- [@Carreirahenri](https://www.github.com/Carreirahenri)
+- [@devgustavojf](https://www.github.com/devgustavojf)
+- [@giomadeira](https://www.github.com/giomadeira)
 
