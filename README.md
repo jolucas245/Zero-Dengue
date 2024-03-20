@@ -21,7 +21,7 @@ Projeto idealizado e desenvolvido por: [confira os autores](#autores)
 <img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/login_c.png">&nbsp;&nbsp;
 <img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/login_v.png">&nbsp;&nbsp;
 <img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/main.png">&nbsp;&nbsp;
-<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/reference_full.png.png">&nbsp;&nbsp;
+<img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/reference_full.png">&nbsp;&nbsp;
 <img width="25%" height="auto" src="https://raw.githubusercontent.com/jolucas245/Zero-Dengue/master/github-images/details.png">&nbsp;&nbsp;
 </div>
 
