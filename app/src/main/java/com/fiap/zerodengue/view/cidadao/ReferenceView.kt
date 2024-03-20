@@ -160,7 +160,7 @@ fun ReferenceView(
                     .fillMaxWidth()
                     .padding(top = 20.dp),
                 keyboardOptions = KeyboardOptions(
-                    imeAction = ImeAction.Done
+                    imeAction = ImeAction.Next
                 ),
                 shape = RoundedCornerShape(32.dp),
                 colors = OutlinedTextFieldDefaults.colors(

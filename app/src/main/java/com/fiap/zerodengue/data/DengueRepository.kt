@@ -11,32 +11,32 @@ import java.time.LocalTime
 import java.util.UUID
 
 class DengueRepository {
-    val db = Firebase.firestore
-    val user = Firebase.auth.currentUser
+    private val db = Firebase.firestore
+    private val user = Firebase.auth.currentUser
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun saveDengueLocation(location: DengueLocation, imageUri: Uri, callback: (Boolean) -> Unit, ){
-        callback(true)
-        uploadImage(imageUri){ imageUri ->
-            if(imageUri != null){
-                location.imageUrl = imageUri
-                user?.uid?.let { userId ->
-                    db.collection("locations")
-                        .document(userId + LocalTime.now())
-                        .set(location)
-                        .addOnSuccessListener {
-                            callback(false)
-                        }
-                        .addOnFailureListener{
-                            callback(false)
-                        }
+        @RequiresApi(Build.VERSION_CODES.O)
+        fun saveDengueLocation(location: DengueLocation, imageUri: Uri, callback: (Boolean) -> Unit, ){
+            callback(true)
+            uploadImage(imageUri){ imageUri ->
+                if(imageUri != null){
+                    location.imageUrl = imageUri
+                    user?.uid?.let { userId ->
+                        db.collection("locations")
+                            .document(userId + LocalTime.now())
+                            .set(location)
+                            .addOnSuccessListener {
+                                callback(false)
+                            }
+                            .addOnFailureListener{
+                                callback(false)
+                            }
+                    }
+                } else {
+                    callback(false)
                 }
-            } else {
-                callback(false)
             }
         }
-    }
 
     fun uploadImage(imageUri: Uri, callback: (String) -> Unit){
         val storageRef =  Firebase.storage.reference.child("images/${UUID.randomUUID()}")
@@ -49,17 +49,40 @@ class DengueRepository {
             }
     }
 
-    fun getImages(onSuccess: (List<String>) -> Unit, onFailure: (Exception) -> Unit) {
-        val db = Firebase.firestore
-        db.collection("locations")
-            .get()
-            .addOnSuccessListener { documents ->
-                val urls = documents.mapNotNull { it.getString("imageUrl") }
-                onSuccess(urls)
-            }
-            .addOnFailureListener { exception ->
-                onFailure(exception)
-            }
-    }
+//    fun getImages(onSuccess: (List<String>) -> Unit, onFailure: (Exception) -> Unit) {
+//        val db = Firebase.firestore
+//        db.collection("locations")
+//            .get()
+//            .addOnSuccessListener { documents ->
+//                val urls = documents.mapNotNull { it.getString("imageUrl") }
+//                onSuccess(urls)
+//            }
+//            .addOnFailureListener { exception ->
+//                onFailure(exception)
+//            }
+//    }
 
+fun getImages(onSuccess: (List<DengueLocation>) -> Unit, onFailure: (Exception) -> Unit) {
+    val db = Firebase.firestore
+    db.collection("locations")
+        .get()
+        .addOnSuccessListener { documents ->
+            val locations = documents.mapNotNull { document ->
+                val address = document.getString("address")
+                val refPoint = document.getString("refPoint")
+                val description = document.getString("description")
+                val imageUrl = document.getString("imageUrl")
+
+                if (address != null && refPoint != null && description != null && imageUrl != null) {
+                    DengueLocation(address, refPoint, description, imageUrl)
+                } else {
+                    null
+                }
+            }
+            onSuccess(locations)
+        }
+        .addOnFailureListener { exception ->
+            onFailure(exception)
+        }
+}
 }

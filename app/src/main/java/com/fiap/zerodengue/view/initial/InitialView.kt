@@ -74,6 +74,7 @@ fun InitialView(navController: NavController){
            ) {
                Text(text = "Vistoriador", fontSize = 24.sp)
            }
+
        }
     }
 }
